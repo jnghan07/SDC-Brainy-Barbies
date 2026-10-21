@@ -1,7 +1,7 @@
 # SDC-Brainy-Barbies
 Working on XMUM SDC Hack Domain 1 - AIVERSECITY 
 
-## Team Information `#0969DA`
+## Team Information
 **Leader** \
 **Member 1**\
 **Member 2**\
