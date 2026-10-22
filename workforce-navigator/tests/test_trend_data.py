@@ -128,7 +128,7 @@ class FixtureValidationTests(unittest.TestCase):
         self.assertEqual(get_role_skills("TEST-001", data_dir=self.data_dir), ["Python"])
         self.assertEqual(len(get_trends("TEST-001", data_dir=self.data_dir)), 1)
         self.assertEqual(
-            get_courses("ML", data_dir=self.data_dir)["course_id"].tolist(),
+            get_courses("Python", data_dir=self.data_dir)["course_id"].tolist(),
             ["FIXTURE-COURSE-001"],
         )
         self.assertEqual(len(get_sdg_mappings("TEST-001", data_dir=self.data_dir)), 1)
