@@ -162,10 +162,27 @@ rewritten values.
    `requires_verification`. Keep source names/URLs/dates blank when they have
    not actually been checked. Do not mark a claim verified until the source,
    evidence, and dates are traceable.
-5. Normalize role IDs and skill labels, edit the CSV, and run
-   `python scripts/update_data.py` (or `validate_data.py`) before committing.
-   Review changes manually; validation checks structure and consistency, not
-   whether a source is authoritative or an interpretation is correct.
+5. Normalize role IDs and skill labels, prepare an import CSV with the exact
+   destination schema, and preview it before applying:
+
+   ```bash
+   python scripts/update_data.py --dataset roles --input reviewed_roles.csv
+   python scripts/update_data.py --dataset roles --input reviewed_roles.csv --apply
+   python scripts/validate_data.py
+   ```
+
+   The importer is dry-run by default. It reports `added`, `changed`,
+   `unchanged`, `rejected`, and `needs_review`; valid candidate rows may be
+   written with their unverified status intact, and are counted for review.
+   Verified records cannot be replaced by unverified input. Changing a
+   verified record requires a verified incoming row and the explicit
+   `--confirm-verified-updates` option. The import file is checked against the
+   full four-dataset schema and cross-references before each row is accepted.
+   If some rows are rejected, valid rows can still be applied; the report names
+   every rejected row and the command exits non-zero.
+
+   Review changes manually; structural validation cannot establish whether a
+   source is authoritative or an interpretation is correct.
 6. For SDG mappings, check the official UN goal and relevant target, document
    how the specific role may contribute, and retain supporting evidence.
    Technology use alone is not a sufficient rationale.
@@ -173,6 +190,9 @@ rewritten values.
 There are no verified trend or course records as of this starter snapshot. No
 data refresh date is claimed because no source research has been performed.
 This prototype must not be described as real-time or automatically updated.
+The importer accepts manually reviewed CSVs, including records transcribed
+from downloaded reports or exported from APIs whose access and reuse terms
+have been checked. It does not fetch API data or scrape websites by itself.
 
 ## Validation coverage and limitations
 

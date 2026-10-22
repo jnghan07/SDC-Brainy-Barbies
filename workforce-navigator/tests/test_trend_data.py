@@ -18,6 +18,7 @@ from modules.trend_data import (
     load_datasets,
     validate_datasets,
 )
+from scripts.update_data import plan_csv_update
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
@@ -121,6 +122,30 @@ class FixtureValidationTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
 
+    def _write_import(self, dataset: str, rows: list[dict[str, str]]) -> Path:
+        with (self.data_dir / f"{dataset}.csv").open(newline="", encoding="utf-8") as file:
+            columns = next(csv.reader(file))
+        import_path = self.data_dir / f"incoming_{dataset}.csv"
+        with import_path.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=columns)
+            writer.writeheader()
+            writer.writerows(rows)
+        return import_path
+
+    @staticmethod
+    def _candidate_role(role_id: str, role_name: str) -> dict[str, str]:
+        return {
+            "role_id": role_id,
+            "role_name": role_name,
+            "role_description": "Fictional candidate record for importer testing.",
+            "required_skills": '["Python"]',
+            "skill_weights": "{}",
+            "occupation_source": "",
+            "source_url": "",
+            "verification_status": "candidate_unverified",
+            "record_notes": "Fictional test fixture only.",
+        }
+
     def test_fixture_is_loadable_with_same_interface(self) -> None:
         result = validate_datasets(self.data_dir)
         self.assertTrue(result["valid"], result["errors"])
@@ -176,6 +201,52 @@ class FixtureValidationTests(unittest.TestCase):
         result = validate_datasets(self.data_dir)
         self.assertFalse(result["valid"])
         self.assertTrue(any("verification_status must be one of" in item for item in result["errors"]))
+
+    def test_update_dry_run_reports_candidate_review_without_writing(self) -> None:
+        import_path = self._write_import("roles", [self._candidate_role("TEST-002", "Second test role")])
+        report = plan_csv_update("roles", import_path, data_dir=self.data_dir)
+        self.assertEqual(report["added"], 1)
+        self.assertEqual(report["needs_review"], 1)
+        self.assertFalse(report["applied"])
+        self.assertEqual(len(get_roles(data_dir=self.data_dir)), 1)
+
+    def test_update_apply_writes_only_valid_candidate_records(self) -> None:
+        import_path = self._write_import("roles", [self._candidate_role("TEST-002", "Second test role")])
+        report = plan_csv_update("roles", import_path, data_dir=self.data_dir, apply=True)
+        self.assertEqual(report["added"], 1)
+        self.assertTrue(report["applied"])
+        self.assertEqual(len(get_roles(data_dir=self.data_dir)), 2)
+
+    def test_unverified_import_never_replaces_verified_role(self) -> None:
+        roles_path = self.data_dir / "roles.csv"
+        with roles_path.open(newline="", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            columns = reader.fieldnames
+            verified_role = next(reader)
+        verified_role["occupation_source"] = "Fictional example source"
+        verified_role["source_url"] = "https://example.com/fictional-source"
+        verified_role["verification_status"] = "verified"
+        with roles_path.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=columns)
+            writer.writeheader()
+            writer.writerow(verified_role)
+        incoming_role = self._candidate_role("TEST-001", "Changed unverified title")
+        import_path = self._write_import("roles", [incoming_role])
+
+        report = plan_csv_update("roles", import_path, data_dir=self.data_dir, apply=True)
+
+        self.assertEqual(report["changed"], 0)
+        self.assertEqual(report["needs_review"], 1)
+        self.assertFalse(report["applied"])
+        self.assertEqual(get_role("TEST-001", data_dir=self.data_dir)["role_name"], "Test role")
+
+    def test_duplicate_import_keys_are_reported_not_silently_dropped(self) -> None:
+        row = self._candidate_role("TEST-002", "Second test role")
+        import_path = self._write_import("roles", [row, row])
+        report = plan_csv_update("roles", import_path, data_dir=self.data_dir)
+        self.assertEqual(report["added"], 1)
+        self.assertEqual(report["rejected"], 1)
+        self.assertIn("Duplicate key", report["rejections"][0]["reason"])
 
 
 if __name__ == "__main__":
