@@ -1,3 +1,4 @@
 - [MASCO source edition check](masco-source-edition-check.md) — verify the downloaded document itself; a DOSM entry labelled MASCO 2020 served a PDF marked 2013.
 - [Workspace Python package setup](workspace-python-package-setup.md) — the package installer may create root-level uv files and modify `.replit` when invoked from this workspace.
 - [Workforce evidence guardrails](workforce-evidence-guardrails.md) — direct skill evidence, truthful date precision, and honest uncertainty take priority over record quotas.
+- [Pending merge persistence](pending-merge-persistence.md) — recheck merge state after an approval turn; a clean checkpoint does not prove remote history was integrated.

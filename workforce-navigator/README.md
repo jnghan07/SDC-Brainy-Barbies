@@ -111,17 +111,25 @@ not be presented as authoritative or as an approved scoring model.
 `proposed_scenario_adjustment`, `adjustment_basis`, and
 `interpretation_limitations`.
 
-The starter file contains only a header. No labour-market trends, statistics,
-dates, sources, confidence assessments, or scenario adjustments have been
-invented. A scenario input must be marked verified and remain evidence plus a
-documented proposal; this component never calculates scenario outcomes.
+The catalogue contains five evidence records: two TalentCorp findings for the
+Malaysian GBS sector and three WEF global employer-forecast records. The two
+TalentCorp records remain `requires_verification` because their exact
+publication dates are unresolved; the three WEF records are `verified`.
+Global forecasts are not presented as observed Malaysian hiring demand, and
+the mixed industry signal for UI/UX Design remains `uncertain`. See
+[`research/trend-evidence-review.md`](research/trend-evidence-review.md) for
+source details and limitations.
+
+No record is enabled as a scenario input. A scenario input must be marked
+verified and remain evidence plus a documented proposal; this component never
+calculates scenario outcomes.
 
 ### Malaysian trend-source review (2026-10-23)
 
-The trend file remains header-only because the sources reviewed did not meet
-the combined requirement for clear reuse permission, a dated change in Malaysian
-skill demand, and a direct match to a canonical skill used by an existing role.
-No claims below have been entered as trends:
+The additional sources below were reviewed separately from the five records
+already in the catalogue. They did not meet the combined requirements for
+clear reuse permission and directly aligned, dated Malaysian skill-demand
+evidence. None of these additional claims has been entered as a trend:
 
 - **Tee et al., “Demand for digital skills, skill gaps and graduate
   employability”** (first published 2024-04-25,
@@ -168,9 +176,10 @@ permission and directly aligned skill-level demand evidence become available.
 `course_url`, `cost_status`, `availability_status`, `last_verified_date`,
 `source_url`, `verification_status`, and `record_notes`.
 
-The starter file has no candidate course details because no provider course
-page has been checked. `get_courses()` returns verified entries only; course
-names, providers, prices, availability, and URLs must never be guessed.
+The catalogue contains ten verified, provider-sourced course records.
+`get_courses()` returns verified entries only. Verification reflects the
+recorded `last_verified_date`, not a live guarantee of price or availability;
+course names, providers, prices, availability, and URLs must never be guessed.
 
 ### `sdg_mappings.csv`
 
@@ -238,9 +247,9 @@ rewritten values.
    how the specific role may contribute, and retain supporting evidence.
    Technology use alone is not a sufficient rationale.
 
-There are no verified trend or course records as of this starter snapshot. No
-trend or course data refresh date is claimed because neither dataset contains
-records; the trend-source review above is dated separately.
+Trend evidence and course metadata have been manually researched. Each record
+retains its own source, dates, verification status, and limitations; a separate
+source review does not refresh or verify every record in the catalogue.
 This prototype must not be described as real-time or automatically updated.
 The importer accepts manually reviewed CSVs, including records transcribed
 from downloaded reports or exported from APIs whose access and reuse terms
