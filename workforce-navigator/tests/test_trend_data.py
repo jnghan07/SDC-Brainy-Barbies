@@ -29,7 +29,7 @@ class StarterContractTests(unittest.TestCase):
     def test_datasets_validate_and_have_expected_record_counts(self) -> None:
         result = validate_datasets()
         self.assertTrue(result["valid"], result["errors"])
-        self.assertEqual(result["record_counts"], {"roles": 10, "trends": 0, "courses": 10, "sdg_mappings": 2})
+        self.assertEqual(result["record_counts"], {"roles": 10, "trends": 5, "courses": 10, "sdg_mappings": 2})
 
     def test_public_retrieval_contract(self) -> None:
         self.assertEqual(len(get_roles()), 10)
@@ -38,7 +38,7 @@ class StarterContractTests(unittest.TestCase):
             get_role_skills("MY-CAND-001"),
             ["Data Analysis", "Statistics", "Data Visualization", "Communication"],
         )
-        self.assertEqual(len(get_trends()), 0)
+        self.assertEqual(len(get_trends()), 5)
         self.assertEqual(len(get_courses()), 10)
         self.assertEqual(len(get_courses("ML")), 0)
         self.assertEqual(len(get_sdg_mappings("MY-CAND-006")), 2)
