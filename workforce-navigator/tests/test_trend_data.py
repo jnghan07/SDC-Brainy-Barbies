@@ -26,10 +26,10 @@ DATA_DIR = PROJECT_DIR / "data"
 
 
 class StarterContractTests(unittest.TestCase):
-    def test_starter_datasets_validate_and_have_expected_record_counts(self) -> None:
+    def test_datasets_validate_and_have_expected_record_counts(self) -> None:
         result = validate_datasets()
         self.assertTrue(result["valid"], result["errors"])
-        self.assertEqual(result["record_counts"], {"roles": 10, "trends": 0, "courses": 0, "sdg_mappings": 2})
+        self.assertEqual(result["record_counts"], {"roles": 10, "trends": 0, "courses": 10, "sdg_mappings": 2})
 
     def test_public_retrieval_contract(self) -> None:
         self.assertEqual(len(get_roles()), 10)
@@ -39,12 +39,24 @@ class StarterContractTests(unittest.TestCase):
             ["Data Analysis", "Statistics", "Data Visualization", "Communication"],
         )
         self.assertEqual(len(get_trends()), 0)
-        self.assertEqual(len(get_courses()), 0)
+        self.assertEqual(len(get_courses()), 10)
         self.assertEqual(len(get_courses("ML")), 0)
         self.assertEqual(len(get_sdg_mappings("MY-CAND-006")), 2)
         scenario_inputs = get_scenario_inputs()
         self.assertTrue(scenario_inputs.empty)
         self.assertIn("proposed_scenario_adjustment", scenario_inputs.columns)
+
+    def test_populated_courses_use_canonical_skills_and_are_verified(self) -> None:
+        courses = get_courses()
+        self.assertTrue(courses["verification_status"].eq("verified").all())
+        self.assertEqual(
+            set(get_courses("SEO")["course_id"]),
+            {"GSK-002"},
+        )
+        self.assertEqual(
+            set(get_courses("Python")["course_id"]),
+            {"MSL-001", "GCC-001"},
+        )
 
     def test_not_found_and_invalid_skill_behaviour(self) -> None:
         with self.assertRaisesRegex(KeyError, "Unknown role_id"):

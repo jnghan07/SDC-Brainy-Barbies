@@ -1,1 +1,2 @@
 - [MASCO source edition check](masco-source-edition-check.md) — verify the downloaded document itself; a DOSM entry labelled MASCO 2020 served a PDF marked 2013.
+- [Workspace Python package setup](workspace-python-package-setup.md) — the package installer may create root-level uv files and modify `.replit` when invoked from this workspace.
