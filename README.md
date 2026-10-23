@@ -19,7 +19,7 @@
 
 | Resource          | Link                                           |
 | ----------------- | ---------------------------------------------- |
-| GitHub Repository | https://github.com/your-username/your-project  |
+| GitHub Repository | https://github.com/jnghan07/SDC-Brainy-Barbies |
 | Replit Project    | https://replit.com/@your-username/your-project |
 | Live Demo         | https://your-project.replit.app                |
 | RunPod Endpoint   | https://api.runpod.ai/v2/18vyxb87eihqej        |
@@ -34,13 +34,21 @@
 
 Describe the real-world problem you are solving in 2–4 sentences. Who is affected, and why does it matter?
 
+Due to the rapid development of AI, recent graduates are unable to keep up with on-demand skills as there is a gap in what they learn in universities compared with what they can actually apply in workplace settings, resulting in reviews made by MOHE to keep pace offered courses with AI and industry needs (Ministry of Higher Education Malaysia (MOHE), 2026). Therefore, it is essential to raise awareness among fresh graduates on current and potential future job market trends for better decision-making in terms of their learning priorities and career selection. This way, they can find space and survive in the job market and thrive throughout their careers as our solution tackles this issue. 
+
 ### Solution
 
 Explain how your project uses AI to solve the problem and what makes it valuable.
 
+We solved it by tracking the current job market and displaying on-demand jobs. It also predicts future market trends, providing fresh graduates with a heads-up about job displacement.  
+
+Our proposed application first requires a CV upload or a manual entry of skills the candidate owns. After that, the application extracts skills - explicitly listed in the CV and suggests relevant skills the candidate may have but does not find evidence of it being demonstrated - using an AI model that we trained with public database data. It then recommends careers the candidate can pursue and personalize skills the candidate can learn based on the data obtained from CV extraction. The skills are then supported with SDG mappings to show how candidates' upskilling can contribute towards the goals.  
+
+The frontend portion was done using Replit Core and Gemini API key was used to call backend services. 
+
 ### Key Features
 
-- **Feature 1** — Short description.
+- **Feature 1** — User can upload their CV to see the details about their skills, whether they are still the trends or not.
 - **Feature 2** — Short description.
 - **Feature 3** — Short description.
 
@@ -51,7 +59,7 @@ Explain how your project uses AI to solve the problem and what makes it valuable
 | Frontend      | e.g. HTML, React             |
 | Backend       | e.g. Python, Flask / FastAPI |
 | Database      | e.g. PostgreSQL, SQLite      |
-| AI / Compute  | RunPod (GPU)                 |
+| AI / Compute  | Replit, Gemini, Claude       |
 | Hosting / Dev | Replit                       |
 
 ---
