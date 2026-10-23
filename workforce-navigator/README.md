@@ -116,6 +116,52 @@ dates, sources, confidence assessments, or scenario adjustments have been
 invented. A scenario input must be marked verified and remain evidence plus a
 documented proposal; this component never calculates scenario outcomes.
 
+### Malaysian trend-source review (2026-10-23)
+
+The trend file remains header-only because the sources reviewed did not meet
+the combined requirement for clear reuse permission, a dated change in Malaysian
+skill demand, and a direct match to a canonical skill used by an existing role.
+No claims below have been entered as trends:
+
+- **Tee et al., “Demand for digital skills, skill gaps and graduate
+  employability”** (first published 2024-04-25,
+  [article](https://f1000research.com/articles/13-389),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). The Malaysian
+  employer survey compares current ratings with employers’ expected future
+  ratings, including increases for “communication and collaboration,”
+  “problem-solving,” and “safety.” This is a forecast comparison, not an
+  observed labour-demand time series. “Communication and collaboration” is a
+  combined measure, not the component’s standalone `Communication` skill;
+  “problem-solving” and “safety” also do not directly match canonical skills.
+  These results are therefore not assigned to narrower skill labels.
+- **Hays Malaysia, “AI drives decline in Software Development roles”**
+  (published 2025-03-07,
+  [release](https://www.hays.com.my/press-release/content/future-of-work-malaysia-technology-ai-impact)).
+  The release reports a 32% reduction in Malaysian Software Development demand
+  between 2022 and 2024, an exact skill-label and period match. However,
+  [Hays Malaysia’s terms](https://www.hays.com.my/terms-and-conditions) state
+  that site information is its copyright and prohibit copying or distribution
+  for business or commercial use. No separate data reuse permission was found,
+  so this claim is not reproduced in the CSV.
+- **OpenDOSM, Quarterly Skills-Related Underemployment by Age**
+  ([dataset](https://open.dosm.gov.my/data-catalogue/lfs_qtr_sru_age),
+  data available from 2017 and updated 2026-08-11,
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). The reusable
+  series measures tertiary-educated workers in semi-skilled or low-skilled
+  occupations classified under MASCO; it does not measure demand for the
+  component’s individual canonical skills.
+- **LinkedIn Future of Skills**
+  ([explorer](https://linkedin.github.io/future-of-skills)) includes Malaysia
+  and compares worker skill profiles across years, but its page says LinkedIn
+  data is governed by the LinkedIn User Agreement. It describes changes in
+  member skill profiles, not Malaysian employer demand, and does not provide
+  clear independent reuse terms for this dataset.
+
+The exclusions are intentional: no demand direction is inferred by mapping a
+broad occupation group, a composite skill, or worker profile prevalence onto a
+narrower canonical skill. Revisit these sources only if suitable reuse
+permission and directly aligned skill-level demand evidence become available.
+
 ### `courses.csv`
 
 `course_id`, `course_name`, `provider`, `target_skills` (JSON array),
@@ -193,8 +239,8 @@ rewritten values.
    Technology use alone is not a sufficient rationale.
 
 There are no verified trend or course records as of this starter snapshot. No
-trend or course data refresh date is claimed because those datasets have not
-been researched.
+trend or course data refresh date is claimed because neither dataset contains
+records; the trend-source review above is dated separately.
 This prototype must not be described as real-time or automatically updated.
 The importer accepts manually reviewed CSVs, including records transcribed
 from downloaded reports or exported from APIs whose access and reuse terms
