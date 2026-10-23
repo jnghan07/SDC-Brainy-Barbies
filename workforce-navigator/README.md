@@ -94,9 +94,11 @@ object; empty `{}` until defensible weights are agreed), `occupation_source`,
 `source_url`, `verification_status`, and `record_notes`.
 
 The 10 `MY-CAND-*` rows are proposed role examples for Malaysian students and
-fresh graduates. Their role descriptions and skills are candidates, not
-validated occupational requirements. Do not interpret an empty `skill_weights`
-object as zero importance or as an approved scoring model.
+fresh graduates. Some descriptions and skill labels now reflect relevant
+Malaysian occupational frameworks, but every row remains `candidate_unverified`:
+framework examples do not establish universal employer requirements or confirm
+fresh-graduate suitability. Do not interpret an empty `skill_weights` object as
+zero importance or as an approved scoring model.
 
 ### `trends.csv`
 
@@ -128,9 +130,10 @@ names, providers, prices, availability, and URLs must never be guessed.
 `supporting_evidence`, `source_url`, `verification_status`, and `record_notes`.
 
 The two Sustainability Analyst examples are hypotheses, labelled
-`candidate_unverified`; their supporting evidence and source URL are blank.
-They are not verified associations. Verify an official UN goal/target and
-role-specific evidence before changing a mapping to `verified`.
+`candidate_unverified`. Their source URLs point to the official UN Goal 12 and
+Goal 13 pages, but supporting role-specific evidence remains blank. The UN
+targets establish the goal wording, not a link to this occupation. Do not treat
+either mapping as verified without evidence tied to actual role duties.
 
 ## Skill vocabulary
 
@@ -188,7 +191,8 @@ rewritten values.
    Technology use alone is not a sufficient rationale.
 
 There are no verified trend or course records as of this starter snapshot. No
-data refresh date is claimed because no source research has been performed.
+trend or course data refresh date is claimed because those datasets have not
+been researched.
 This prototype must not be described as real-time or automatically updated.
 The importer accepts manually reviewed CSVs, including records transcribed
 from downloaded reports or exported from APIs whose access and reuse terms

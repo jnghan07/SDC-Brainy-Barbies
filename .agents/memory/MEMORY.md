@@ -1,0 +1,1 @@
+- [MASCO source edition check](masco-source-edition-check.md) — verify the downloaded document itself; a DOSM entry labelled MASCO 2020 served a PDF marked 2013.

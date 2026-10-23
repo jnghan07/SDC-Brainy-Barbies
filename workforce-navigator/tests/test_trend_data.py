@@ -34,7 +34,10 @@ class StarterContractTests(unittest.TestCase):
     def test_public_retrieval_contract(self) -> None:
         self.assertEqual(len(get_roles()), 10)
         self.assertEqual(get_role("MY-CAND-001")["role_name"], "Data Analyst")
-        self.assertEqual(get_role_skills("MY-CAND-001"), ["Data Analysis", "SQL", "Python", "Data Visualization"])
+        self.assertEqual(
+            get_role_skills("MY-CAND-001"),
+            ["Data Analysis", "Statistics", "Data Visualization", "Communication"],
+        )
         self.assertEqual(len(get_trends()), 0)
         self.assertEqual(len(get_courses()), 0)
         self.assertEqual(len(get_courses("ML")), 0)
