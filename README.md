@@ -1,11 +1,3 @@
-> [!IMPORTANT]
-> ## 📁 Submission Documents & Templates
-> **All required submission templates are in the Google Drive folder below. Download them before you start.**
->
-> ### 👉 [**OPEN THE GOOGLE DRIVE FOLDER**](https://drive.google.com/drive/folders/1xw7c2aN8N-at8hPEULzkcU76e_FFb0Ef) 👈
-
----
-
 # Project Name
 
 > A one-sentence description of what your project does and who it is for.
@@ -16,12 +8,12 @@
 
 | Field                  | Details                                     |
 | ---------------------- | ------------------------------------------- |
-| **Team Name**          | Your Team Name                              |
-| **Team Domain**        | Domain 1 / Domain 2 *(choose one)*          |
-| **SDG Track (1–17)**   | e.g. SDG 11 — Sustainable Cities and Communities |
-| **Team Leader**        | Leader Name                                 |
-| **University**         | University Name(s)                          |
-| **Number of Members**  | e.g. 4                                      |
+| **Team Name**          | Brainy Barbies                              |
+| **Team Domain**        | Domain 1                                    |
+| **SDG Track (1–17)**   | SDG 8 — Decent Work and Economic Growth     |
+| **Team Leader**        | Law Jing Xuan                               |
+| **University**         | Asia Pacific University                     |
+| **Number of Members**  | 5                                           |
 
 ## Links
 
@@ -30,7 +22,7 @@
 | GitHub Repository | https://github.com/your-username/your-project  |
 | Replit Project    | https://replit.com/@your-username/your-project |
 | Live Demo         | https://your-project.replit.app                |
-| RunPod Endpoint   | https://api.runpod.ai/v2/your-endpoint-id      |
+| RunPod Endpoint   | https://api.runpod.ai/v2/18vyxb87eihqej        |
 | Slide Deck        | https://example.com/slides                     |
 | Demo Video        | https://example.com/demo-video                 |
 
@@ -149,20 +141,18 @@ Describe how your team used Replit. For example:
 📄 Proof of use: [`submission/SDC2026_TeamName_Replit_POU.pdf`](submission/SDC2026_TeamName_Replit_POU.pdf)
 
 ## How We Use RunPod *(Required)*
-
-Describe how your team used RunPod. For example:
-
-- **Workload:** Model inference (e.g. text generation, image processing) runs on a RunPod GPU.
+- **Workload:**
+  Our project uses the Qwen3-VL-4B-Instruct vision-language model for CV information extraction. The model processes CV content and extracts structured candidate information, including contact details, education, work experience, skills, projects, and certifications.
 - **Setup:** `runpod/handler.py` is deployed as a **RunPod Serverless Endpoint**.
-- **Integration:** The Replit app sends requests to the endpoint using `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID`.
+- **Integration:** The Replit app sends requests to the endpoint using `RUNPOD_API_KEY` and `RUNPOD_ENDPOINT_ID` environment variables. These credentials are stored as environment secrets and are not committed to the repository. The application uses the endpoint's OpenAI-compatible Chat Completions API for CV extraction.
 
 Example request:
 
 ```bash
-curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/runsync \
-  -H "Authorization: Bearer $RUNPOD_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"input": {"prompt": "Hello"}}'
+curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: Bearer YOUR_API_KEY' \
+    -d '{"input":{"prompt":"Extract CV information into JSON. Return these fields: full_name, email, phone, location, target_job_title, industry, professional_summary, education, experience, skills, projects, certifications."}}'
 ```
 
 📄 Proof of use: [`submission/SDC2026_TeamName_Runpod_POU.pdf`](submission/SDC2026_TeamName_Runpod_POU.pdf)
@@ -184,8 +174,8 @@ curl -X POST https://api.runpod.ai/v2/$RUNPOD_ENDPOINT_ID/runsync \
 | Name        | Role                | GitHub                                   |
 | ----------- | ------------------- | ---------------------------------------- |
 | Member Name | Team Lead / Backend | [@username](https://github.com/username) |
-| Member Name | Frontend            | [@username](https://github.com/username) |
-| Member Name | AI / RunPod         | [@username](https://github.com/username) |
+| Law Jing Xuan | Frontend         | [@JingXuannn123](https://github.com/JingXuannn123) |
+| Stephy Tsen Yung Yi | AI / RunPod | [@stapi0904](https://github.com/stapi0904) |
 
 ---
 
