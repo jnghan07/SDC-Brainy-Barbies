@@ -86,7 +86,7 @@ class FixtureValidationTests(unittest.TestCase):
                         ]
                     )
                     writer.writerow(
-                        ["TEST-001", "Test role", "Candidate description", '["Python"]', "{}",
+                        ["TEST-001", "Test role", "Candidate description", '["Python"]', '{"Python": 3}',
                          "", "", "candidate_unverified", "Fixture only"]
                     )
                 elif name == "trends":
@@ -154,12 +154,24 @@ class FixtureValidationTests(unittest.TestCase):
             "role_name": role_name,
             "role_description": "Fictional candidate record for importer testing.",
             "required_skills": '["Python"]',
-            "skill_weights": "{}",
+            "skill_weights": '{"Python": 3}',
             "occupation_source": "",
             "source_url": "",
             "verification_status": "candidate_unverified",
             "record_notes": "Fictional test fixture only.",
         }
+
+    def _update_role_cell(self, column: str, value: str) -> None:
+        role_file = self.data_dir / "roles.csv"
+        with role_file.open(newline="", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            columns = reader.fieldnames
+            rows = list(reader)
+        rows[0][column] = value
+        with role_file.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=columns)
+            writer.writeheader()
+            writer.writerows(rows)
 
     def test_fixture_is_loadable_with_same_interface(self) -> None:
         result = validate_datasets(self.data_dir)
@@ -189,6 +201,52 @@ class FixtureValidationTests(unittest.TestCase):
         result = validate_datasets(self.data_dir)
         self.assertFalse(result["valid"])
         self.assertTrue(any("roles.csv is missing required columns: role_description" in item for item in result["errors"]))
+
+    def test_role_skill_weights_require_valid_json_object(self) -> None:
+        self._update_role_cell("skill_weights", '{"Python":')
+        result = validate_datasets(self.data_dir)
+        self.assertFalse(result["valid"])
+        joined = "\n".join(result["errors"])
+        self.assertIn("roles.csv row 2 (TEST-001) skill_weights must contain valid JSON", joined)
+
+    def test_role_skill_weights_cannot_be_missing_or_blank(self) -> None:
+        for value in ("", "   "):
+            with self.subTest(value=value):
+                self._update_role_cell("skill_weights", value)
+                result = validate_datasets(self.data_dir)
+                self.assertFalse(result["valid"])
+                self.assertTrue(any(
+                    "roles.csv row 2 (TEST-001) skill_weights must not be blank" in item
+                    for item in result["errors"]
+                ))
+
+    def test_role_skill_weights_require_integer_values_from_one_to_three(self) -> None:
+        for json_value in ("0", "4", "1.5", "true", "null", '"3"'):
+            value = f'{{"Python": {json_value}}}'
+            with self.subTest(value=value):
+                self._update_role_cell("skill_weights", value)
+                result = validate_datasets(self.data_dir)
+                self.assertFalse(result["valid"])
+                self.assertTrue(any(
+                    "each weight must be an integer from 1 to 3" in item
+                    and "TEST-001" in item
+                    for item in result["errors"]
+                ))
+
+    def test_role_skill_weights_must_match_required_skill_keys_exactly(self) -> None:
+        for value, expected_error in (
+            ("{}", "missing required skill key(s): Python"),
+            ('{"JavaScript": 2}', "missing required skill key(s): Python"),
+            ('{"Python": 3, "SQL": 1}', "extra or mismatched skill key(s): SQL"),
+        ):
+            with self.subTest(value=value):
+                self._update_role_cell("skill_weights", value)
+                result = validate_datasets(self.data_dir)
+                self.assertFalse(result["valid"])
+                self.assertTrue(any(
+                    expected_error in item and "roles.csv row 2 (TEST-001)" in item
+                    for item in result["errors"]
+                ))
 
     def test_duplicate_ids_invalid_dates_and_references_are_rejected(self) -> None:
         trend_file = self.data_dir / "trends.csv"

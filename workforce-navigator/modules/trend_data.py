@@ -235,29 +235,18 @@ def _validate_status(frame: pd.DataFrame, dataset: str, errors: list[str]) -> No
             )
 
 
-def _validate_skills_json(value: str, context: str, errors: list[str], *, allow_weights: bool = False) -> None:
-    parsed = _json_cell(value, context)
-    if allow_weights:
-        if not isinstance(parsed, dict):
-            errors.append(f"{context} must be a JSON object mapping canonical skills to optional weights.")
-            return
-        for raw_skill, weight in parsed.items():
-            try:
-                canonicalize_skill(raw_skill)
-            except ValueError as exc:
-                errors.append(f"{context}: {exc}")
-            if weight is not None and (
-                not isinstance(weight, (int, float)) or isinstance(weight, bool) or not 0 <= weight <= 1
-            ):
-                errors.append(f"{context}: weights must be numbers from 0 to 1 or null; got {weight!r}.")
-        return
-
+def _validate_skills_json(value: str, context: str, errors: list[str]) -> list[str] | None:
+    try:
+        parsed = _json_cell(value, context)
+    except ValueError as exc:
+        errors.append(str(exc))
+        return None
     if not isinstance(parsed, list):
         errors.append(f"{context} must be a JSON array of canonical skill names.")
-        return
+        return None
     if any(not isinstance(item, str) for item in parsed):
         errors.append(f"{context} must contain only string skill names.")
-        return
+        return None
     if len(parsed) != len(set(parsed)):
         errors.append(f"{context} contains duplicate skills.")
     for raw_skill in parsed:
@@ -265,6 +254,47 @@ def _validate_skills_json(value: str, context: str, errors: list[str], *, allow_
             canonicalize_skill(raw_skill)
         except ValueError as exc:
             errors.append(f"{context}: {exc}")
+    return parsed
+
+
+def _validate_role_skill_weights(
+    value: str,
+    required_skills: list[str] | None,
+    context: str,
+    errors: list[str],
+) -> None:
+    if not value.strip():
+        errors.append(f"{context} must not be blank.")
+        return
+    try:
+        parsed = _json_cell(value, context)
+    except ValueError as exc:
+        errors.append(str(exc))
+        return
+    if not isinstance(parsed, dict):
+        errors.append(f"{context} must be a JSON object mapping each required skill to an integer weight from 1 to 3.")
+        return
+
+    for raw_skill, weight in parsed.items():
+        try:
+            canonical = canonicalize_skill(raw_skill)
+        except ValueError as exc:
+            errors.append(f"{context}: {exc}")
+        else:
+            if raw_skill != canonical:
+                errors.append(f"{context} must use canonical skill labels; got {raw_skill!r}, expected {canonical!r}.")
+        if type(weight) is not int or not 1 <= weight <= 3:
+            errors.append(f"{context}: each weight must be an integer from 1 to 3; {raw_skill!r} has {weight!r}.")
+
+    if required_skills is not None:
+        expected = set(required_skills)
+        actual = set(parsed)
+        missing = sorted(expected - actual)
+        extra = sorted(actual - expected)
+        if missing:
+            errors.append(f"{context} is missing required skill key(s): {', '.join(missing)}.")
+        if extra:
+            errors.append(f"{context} has extra or mismatched skill key(s): {', '.join(extra)}.")
 
 
 def _validate_dataset_values(datasets: dict[str, pd.DataFrame], errors: list[str]) -> None:
@@ -307,15 +337,22 @@ def _validate_dataset_values(datasets: dict[str, pd.DataFrame], errors: list[str
 
     for idx, row in roles.iterrows():
         line = idx + 2
-        for column in ("role_name", "role_description", "required_skills", "skill_weights"):
+        for column in ("role_name", "role_description", "required_skills"):
             if not row[column].strip():
                 errors.append(f"roles.csv row {line}: {column} must not be blank.")
+        required_skills = None
         if row["required_skills"].strip():
-            _validate_skills_json(row["required_skills"], f"roles.csv row {line} required_skills", errors)
-        if row["skill_weights"].strip():
-            _validate_skills_json(
-                row["skill_weights"], f"roles.csv row {line} skill_weights", errors, allow_weights=True
+            required_skills = _validate_skills_json(
+                row["required_skills"],
+                f"roles.csv row {line} ({row['role_id']}) required_skills",
+                errors,
             )
+        _validate_role_skill_weights(
+            row["skill_weights"],
+            required_skills,
+            f"roles.csv row {line} ({row['role_id']}) skill_weights",
+            errors,
+        )
         _validate_url(row["source_url"], f"roles.csv row {line} source_url", errors)
         if row["verification_status"] == "verified":
             if not row["occupation_source"].strip() or not row["source_url"].strip():

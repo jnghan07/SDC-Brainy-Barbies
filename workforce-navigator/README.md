@@ -90,15 +90,17 @@ are validated.
 
 `role_id` (stable join key), `role_name`, `role_description`,
 `required_skills` (JSON array of canonical labels), `skill_weights` (JSON
-object; empty `{}` until defensible weights are agreed), `occupation_source`,
+object mapping each required skill label to an integer weight from 1 to 3), `occupation_source`,
 `source_url`, `verification_status`, and `record_notes`.
 
 The 10 `MY-CAND-*` rows are proposed role examples for Malaysian students and
 fresh graduates. Some descriptions and skill labels now reflect relevant
 Malaysian occupational frameworks, but every row remains `candidate_unverified`:
 framework examples do not establish universal employer requirements or confirm
-fresh-graduate suitability. Do not interpret an empty `skill_weights` object as
-zero importance or as an approved scoring model.
+fresh-graduate suitability. `skill_weights` values are explicit project
+assumptions about relative priority, not official occupational ratings or
+verified evidence. They do not change a role's verification status and should
+not be presented as authoritative or as an approved scoring model.
 
 ### `trends.csv`
 
