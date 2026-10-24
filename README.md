@@ -47,6 +47,7 @@ The frontend portion was done using Replit Core and Gemini API key was used to c
 - **Feature 1** — User can upload their CV then their CV will be extracted.
 - **Feature 2** — User can see the details about their skills analysis
 - **Feature 3** — User can know which jobs are applicable for them.
+  
 ### Tech Stack
 
 | Layer         | Technology                   |
@@ -170,13 +171,13 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 ## Future Improvements
 
 - Improvement 1: Real-time job market tracking
-- connect FuturePath to reliable job-market data sources that update regularly
-- so recommendations become more relevant to the actual job market
+  connect FuturePath to reliable job-market data sources that update regularly
+  so recommendations become more relevant to the actual job market
 
 - Improvement 2: More accurate and explainable career matching
-- Improve system recommendations 
-- Refresh recommendations whenever candidate updates their profile
-- Identify missing/underdeveloped skills
+  Improve system recommendations 
+  Refresh recommendations whenever candidate updates their profile
+  Identify missing/underdeveloped skills
 
 ## Team
 
@@ -193,12 +194,12 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 ## Submission Checklist
 
 - [x] Team name, domain (Domain 1 / Domain 2) and SDG track filled in
-- [ ] Slide deck link added
-- [ ] Demo video link added
+- [x] Slide deck link added
+- [x] Demo video link added
 - [x] Replit used, with proof of use in `submission/`
 - [x] RunPod used, with proof of use in `submission/`
 - [x] Preliminary submission completed (`SDC2026_TeamName_Preliminary.pdf`)
-- [ ] Technology declaration completed (`SDC2026_TeamName_TechDeclaration.pdf`)
+- [x] Technology declaration completed (`SDC2026_TeamName_TechDeclaration.pdf`)
 - [x] Submission files renamed with your team name (replace `TeamName`)
 - [x] "How to Run" steps verified
 - [x] No API keys or secrets committed to the repository
