@@ -1,0 +1,58 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "MbjGw10NHQhhtw8vTMsT-"
+uri = "file://workforce-navigator/data/roles.csv"
+type = "table"
+title = "roles.csv"
+description = "10 unverified candidate role records for the Workforce Navigator."
+logical_id = "5998d3e3-e370-41dc-a5a2-fd5accbb839b"
+content_hash = "sha256:f004e2b0ff6c55a5d7f3c17f2ea7975de637e29dd69d8fa410e723f7d230cc13"
+size = 4000
+mtime_ms = 1792661372634
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:a5ab6deb-9b36-4e43-8927-ae03ce51ff84/5998d3e3-e370-41dc-a5a2-fd5accbb839b/0a4774bf-9bb6-41cd-b881-1a1e223884f7"
+storage_version_token = "1792674247655924"
+content_type = "text/csv"
+
+[[outputs]]
+id = "krUiRf9OP4weMn366MMYz"
+uri = "file://workforce-navigator/data/trends.csv"
+type = "table"
+title = "trends.csv"
+description = "Trend schema only; no trend findings have been verified or added."
+logical_id = "4d635840-824d-4091-bb21-a6c63ab1d113"
+content_hash = "sha256:73434ffc4bf3500dce2bb46a6bfd6f4441eaf19930d175ab3e9e90f625decbcb"
+size = 277
+mtime_ms = 1792661373326
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:a5ab6deb-9b36-4e43-8927-ae03ce51ff84/4d635840-824d-4091-bb21-a6c63ab1d113/18b475ee-cdfb-46d1-9ae2-6050740f71ef"
+storage_version_token = "1792674248962450"
+content_type = "text/csv"
+
+[[outputs]]
+id = "VSTfuS60mtHXkbNWZaToh"
+uri = "file://workforce-navigator/data/courses.csv"
+type = "table"
+title = "courses.csv"
+description = "Course schema only; no course details have been verified or added."
+logical_id = "bb57ecd8-e043-421d-988c-130dab05a1b4"
+content_hash = "sha256:8a53a99dce77b1a1bf15ebbc2b5f9cfcf09d75f97c437bdd548c61a1c9223f97"
+size = 151
+mtime_ms = 1792661373718
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:a5ab6deb-9b36-4e43-8927-ae03ce51ff84/bb57ecd8-e043-421d-988c-130dab05a1b4/e516d5d3-71de-470a-b46e-331b75d3869f"
+storage_version_token = "1792674250262757"
+content_type = "text/csv"
+
+[[outputs]]
+id = "NIXS3vDu8Jnp7rC7rnbpY"
+uri = "file://workforce-navigator/data/sdg_mappings.csv"
+type = "table"
+title = "sdg_mappings.csv"
+description = "Two candidate SDG associations, both explicitly marked unverified."
+logical_id = "a6da312a-822c-40c1-81ff-bf76fa0536db"
+content_hash = "sha256:e88eb00089ad99a3956437e476f63dc38d22c9b732bc242ac93d8c14efb65c6a"
+size = 785
+mtime_ms = 1792661375254
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:a5ab6deb-9b36-4e43-8927-ae03ce51ff84/a6da312a-822c-40c1-81ff-bf76fa0536db/040c409a-3c5e-44e5-a74d-bc3725e49a13"
+storage_version_token = "1792674251569121"
+content_type = "text/csv"
