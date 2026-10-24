@@ -20,7 +20,6 @@
 | Resource          | Link                                                    |
 | ----------------- | ------------------------------------------------------- |
 | GitHub Repository | https://github.com/jnghan07/SDC-Brainy-Barbies          |
-| Replit Project    | https://replit.com/t/brainy-barbies/repls/FuturePath-AI |
 | Live Demo         | https://future-path-ai-lawjingxuan1234.replit.app       |
 | RunPod Endpoint   | https://api.runpod.ai/v2/18vyxb87eihqej                 |
 | Slide Deck        | https://example.com/slides                              |
