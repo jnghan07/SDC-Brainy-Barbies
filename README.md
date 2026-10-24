@@ -23,7 +23,7 @@
 | Live Demo         | https://future-path-ai-lawjingxuan1234.replit.app       |
 | RunPod Endpoint   | https://api.runpod.ai/v2/18vyxb87eihqej                 |
 | Slide Deck        | [SDC2026_BrainyBarbies_Slides_Deck.pptx](https://github.com/jnghan07/SDC-Brainy-Barbies/blob/e1f6e9c025a138705d9349243467880b202ae2db/submission/SDC2026_BrainyBarbies_%20Slides%20Deck.pptx)|
-| Demo Video        | https://youtu.be/s3CjR8uR0gg                          |
+| Demo Video        | https://www.youtube.com/watch?v=s3CjR8uR0gg                          |
 
 ---
 
