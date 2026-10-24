@@ -169,11 +169,11 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 
 ## Future Improvements
 
-- [ ] Improvement 1: Real-time job market tracking
+- Improvement 1: Real-time job market tracking
 - connect FuturePath to reliable job-market data sources that update regularly
 - so recommendations become more relevant to the actual job market
 
-- [ ] Improvement 2: More accurate and explainable career matching
+- Improvement 2: More accurate and explainable career matching
 - Improve system recommendations 
 - Refresh recommendations whenever candidate updates their profile
 - Identify missing/underdeveloped skills
