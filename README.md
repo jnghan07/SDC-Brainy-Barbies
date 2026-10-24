@@ -22,8 +22,8 @@
 | GitHub Repository | https://github.com/jnghan07/SDC-Brainy-Barbies          |
 | Live Demo         | https://future-path-ai-lawjingxuan1234.replit.app       |
 | RunPod Endpoint   | https://api.runpod.ai/v2/18vyxb87eihqej                 |
-| Slide Deck        | https://example.com/slides                              |
-| Demo Video        | https://example.com/demo-video                          |
+| Slide Deck        | [SDC2026_BrainyBarbies_Slides_Deck.pptx](https://github.com/jnghan07/SDC-Brainy-Barbies/blob/e1f6e9c025a138705d9349243467880b202ae2db/submission/SDC2026_BrainyBarbies_%20Slides%20Deck.pptx)|
+| Demo Video        | https://youtu.be/s3CjR8uR0gg                          |
 
 ---
 
@@ -98,7 +98,7 @@ User ──► Replit (App / API) ──► RunPod Endpoint (GPU model)
 
 ### Option 1 — Run on Replit (Recommended)
 
-1. Open the [FuturePath-AI](https://replit.com/t/brainy-barbies/repls/FuturePath-AI), or import this repository via **Create Repl → Import from GitHub**.
+1. Import this repository in Replit via **Create Repl → Import from GitHub**.
 2. Open the **Secrets** tab (🔒) and add the variables listed in `.env`:
    - `RUNPOD_API_KEY`
    - `RUNPOD_ENDPOINT_ID`
@@ -197,8 +197,8 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 - [x] Demo video link added
 - [x] Replit used, with proof of use in `submission/`
 - [x] RunPod used, with proof of use in `submission/`
-- [x] Preliminary submission completed (`SDC2026_TeamName_Preliminary.pdf`)
-- [x] Technology declaration completed (`SDC2026_TeamName_TechDeclaration.pdf`)
+- [x] Preliminary submission completed [`SDC2026_BrainyBarbies_Preliminary.pdf`](https://github.com/jnghan07/SDC-Brainy-Barbies/blob/e1f6e9c025a138705d9349243467880b202ae2db/submission/SDC2026_BrainyBarbies_%20Preliminary.pdf)
+- [x] Technology declaration completed [`SDC2026_BrainyBarbies_TechDeclaration.pdf`](https://github.com/jnghan07/SDC-Brainy-Barbies/blob/e1f6e9c025a138705d9349243467880b202ae2db/submission/SDC2026_BrainyBarbies_TechDeclaration.pdf)
 - [x] Submission files renamed with your team name (replace `TeamName`)
 - [x] "How to Run" steps verified
 - [x] No API keys or secrets committed to the repository
