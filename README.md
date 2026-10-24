@@ -99,7 +99,7 @@ User ──► Replit (App / API) ──► RunPod Endpoint (GPU model)
 ### Option 1 — Run on Replit (Recommended)
 
 1. Open the [FuturePath-AI](https://replit.com/t/brainy-barbies/repls/FuturePath-AI), or import this repository via **Create Repl → Import from GitHub**.
-2. Open the **Secrets** tab (🔒) and add the variables listed in `.env.example`:
+2. Open the **Secrets** tab (🔒) and add the variables listed in `.env`:
    - `RUNPOD_API_KEY`
    - `RUNPOD_ENDPOINT_ID`
 3. Click **Run**. Replit uses the `.replit` file to start `python src/main.py`.
@@ -169,8 +169,14 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 
 ## Future Improvements
 
-- [ ] Improvement 1
-- [ ] Improvement 2
+- [ ] Improvement 1: Real-time job market tracking
+- connect FuturePath to reliable job-market data sources that update regularly
+- so recommendations become more relevant to the actual job market
+
+- [ ] Improvement 2: More accurate and explainable career matching
+- Improve system recommendations 
+- Refresh recommendations whenever candidate updates their profile
+- Identify missing/underdeveloped skills
 
 ## Team
 
@@ -187,16 +193,16 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 
 ## Submission Checklist
 
-- [v] Team name, domain (Domain 1 / Domain 2) and SDG track filled in
+- [x] Team name, domain (Domain 1 / Domain 2) and SDG track filled in
 - [ ] Slide deck link added
 - [ ] Demo video link added
-- [v] Replit used, with proof of use in `submission/`
-- [v] RunPod used, with proof of use in `submission/`
+- [x] Replit used, with proof of use in `submission/`
+- [x] RunPod used, with proof of use in `submission/`
 - [ ] Preliminary submission completed (`SDC2026_TeamName_Preliminary.pdf`)
 - [ ] Technology declaration completed (`SDC2026_TeamName_TechDeclaration.pdf`)
-- [v] Submission files renamed with your team name (replace `TeamName`)
-- [v] "How to Run" steps verified
-- [v] No API keys or secrets committed to the repository
+- [x] Submission files renamed with your team name (replace `TeamName`)
+- [x] "How to Run" steps verified
+- [x] No API keys or secrets committed to the repository
 
 ## License
 
