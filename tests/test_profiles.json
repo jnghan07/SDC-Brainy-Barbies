@@ -1,0 +1,70 @@
+{
+  "note": "SYNTHETIC test data. Equal skill weights, no trend adjustment. Score = skills matched / skills required x 100. Tiers: Strong >= 70, Moderate 40-69, Stretch < 40. Skills not in a role's list are ignored.",
+  "roles": {
+    "Junior Software Engineer": ["python", "git", "sql", "testing", "ai-assisted coding"],
+    "Data Analyst": ["python", "sql", "statistics", "data visualisation"],
+    "UX Designer": ["figma", "user research", "prototyping", "html", "css"]
+  },
+  "profiles": [
+    {
+      "id": "p1_strong_match",
+      "source_cv": "cv_01_aisyah_computer_science.txt",
+      "skills": ["python", "git", "testing", "ai-assisted coding"],
+      "ignored_non_catalogue_skills": ["flask"],
+      "expected": {
+        "Junior Software Engineer": {"score": 80, "tier": "Strong"},
+        "Data Analyst": {"score": 25, "tier": "Stretch"},
+        "UX Designer": {"score": 0, "tier": "Stretch"}
+      }
+    },
+    {
+      "id": "p2_claimed_vs_evidenced",
+      "source_cv": "cv_02_daniel_business_analytics.txt",
+      "skills": ["sql", "statistics", "data visualisation", "python"],
+      "claimed_only": ["python"],
+      "ignored_non_catalogue_skills": ["excel", "tableau"],
+      "expected_all_claimed": {
+        "Junior Software Engineer": {"score": 40, "tier": "Moderate"},
+        "Data Analyst": {"score": 100, "tier": "Strong"},
+        "UX Designer": {"score": 0, "tier": "Stretch"}
+      },
+      "expected_evidenced_only": {
+        "Junior Software Engineer": {"score": 20, "tier": "Stretch"},
+        "Data Analyst": {"score": 75, "tier": "Strong"},
+        "UX Designer": {"score": 0, "tier": "Stretch"}
+      }
+    },
+    {
+      "id": "p3_career_switcher",
+      "source_cv": "cv_03_meiling_graphic_design.txt",
+      "skills": ["figma", "user research", "html", "css", "git"],
+      "ignored_non_catalogue_skills": ["adobe illustrator", "javascript"],
+      "expected": {
+        "Junior Software Engineer": {"score": 20, "tier": "Stretch"},
+        "Data Analyst": {"score": 0, "tier": "Stretch"},
+        "UX Designer": {"score": 80, "tier": "Strong"}
+      }
+    },
+    {
+      "id": "p4_partial_match",
+      "source_cv": "cv_04_arjun_mechanical_engineering.txt",
+      "skills": ["python", "statistics"],
+      "ignored_non_catalogue_skills": ["matlab", "autocad", "excel"],
+      "expected": {
+        "Junior Software Engineer": {"score": 20, "tier": "Stretch"},
+        "Data Analyst": {"score": 50, "tier": "Moderate"},
+        "UX Designer": {"score": 0, "tier": "Stretch"}
+      }
+    },
+    {
+      "id": "p5_edge_case_empty",
+      "source_cv": null,
+      "skills": [],
+      "expected": {
+        "Junior Software Engineer": {"score": 0, "tier": "Stretch"},
+        "Data Analyst": {"score": 0, "tier": "Stretch"},
+        "UX Designer": {"score": 0, "tier": "Stretch"}
+      }
+    }
+  ]
+}

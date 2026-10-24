@@ -1,0 +1,21 @@
+{
+  "note": "These are estimates, not certainties.",
+  "neutral_weight": 1.0,
+  "minimum_weight": 0.01,
+  "growth_rate_sensitivity": 0.005,
+  "growth_adjustment_limit": 0.1,
+  "growth_rate_units": "Signed percentage points: 10 or 10% means ten percent. Optional growth_rate column.",
+  "method": "Start at neutral weight 1.0 and apply the direction multiplier. Apply bounded growth adjustment in the trend direction; stable stays 1.0. Missing trends stay 1.0.",
+  "scenarios": {
+    "moderate": {
+      "rising": 1.2,
+      "stable": 1.0,
+      "declining": 0.8
+    },
+    "fast_disruption": {
+      "rising": 2.0,
+      "stable": 1.0,
+      "declining": 0.5
+    }
+  }
+}
