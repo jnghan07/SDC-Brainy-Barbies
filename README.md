@@ -98,7 +98,7 @@ User ──► Replit (App / API) ──► RunPod Endpoint (GPU model)
 
 ### Option 1 — Run on Replit (Recommended)
 
-1. Open the [FuturePath-AI](https://replit.com/@your-username/your-project), or import this repository via **Create Repl → Import from GitHub**.
+1. Open the [FuturePath-AI](https://replit.com/t/brainy-barbies/repls/FuturePath-AI), or import this repository via **Create Repl → Import from GitHub**.
 2. Open the **Secrets** tab (🔒) and add the variables listed in `.env.example`:
    - `RUNPOD_API_KEY`
    - `RUNPOD_ENDPOINT_ID`
