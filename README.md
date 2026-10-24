@@ -51,10 +51,10 @@ The frontend portion was done using Replit Core and Gemini API key was used to c
 
 | Layer         | Technology                   |
 | ------------- | ---------------------------- |
-| Frontend      | e.g. HTML, React             |
-| Backend       | e.g. Python, Flask / FastAPI |
-| Database      | e.g. PostgreSQL, SQLite      |
-| AI / Compute  | Replit, Gemini, Claude       |
+| Frontend      | React, TypeScript, Vite      |
+| Backend       | Node.js, Express, TypeScript |
+| Database      | PostgreSQL, Drizzle ORM      |
+| AI / Compute  | Google Gemini API for skills analysis; RunPod Serverless with Qwen3-VL-4B-Instruct for CV extraction |
 | Hosting / Dev | Replit                       |
 
 ---
@@ -70,10 +70,10 @@ The frontend portion was done using Replit Core and Gemini API key was used to c
 │   ├── main.py              # Application entry point
 │   └── utils.py             # Helper functions
 ├── submission/              # Required submission documents
-│   ├── SDC2026_TeamName_Preliminary.pdf      # Preliminary submission
-│   ├── SDC2026_TeamName_TechDeclaration.pdf  # Technology declaration
-│   ├── SDC2026_TeamName_Replit_POU.pdf       # Replit proof of use
-│   └── SDC2026_TeamName_Runpod_POU.pdf       # RunPod proof of use
+│   ├── SDC2026_BrainyBarbies_Preliminary.pdf      # Preliminary submission
+│   ├── SDC2026_BrainyBarbies_TechDeclaration.pdf  # Technology declaration
+│   ├── SDC2026_BrainyBarbies_Replit_POU.pdf       # Replit proof of use
+│   └── SDC2026_BrainyBarbies_Runpod_POU.pdf       # RunPod proof of use
 ├── tests/
 │   └── test_utils.py        # Unit tests
 ├── .env.example             # Example environment variables
@@ -182,8 +182,7 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 
 | Name        | Role                | GitHub                                   |
 | ----------- | ------------------- | ---------------------------------------- |
-| Member Name | Team Lead / Backend | [@username](https://github.com/username) |
-| Law Jing Xuan | Frontend         | [@JingXuannn123](https://github.com/JingXuannn123) |
+| Law Jing Xuan | Frontend / Team Lead | [@JingXuannn123](https://github.com/JingXuannn123) |
 | Stephy Tsen Yung Yi | AI / RunPod | [@stapi0904](https://github.com/stapi0904) |
 | Tan Hui Xin | Backend | [@HU1X1N](https://github.com/HU1X1N) |
 | Bo Chian Nie | Backend / Backend Merging | [@Jennyyy07](https://github.com/Jennyyy07) |
@@ -198,7 +197,7 @@ curl -X POST https://api.runpod.ai/v2/18vyxb87eihqej/runsync \
 - [ ] Demo video link added
 - [x] Replit used, with proof of use in `submission/`
 - [x] RunPod used, with proof of use in `submission/`
-- [ ] Preliminary submission completed (`SDC2026_TeamName_Preliminary.pdf`)
+- [x] Preliminary submission completed (`SDC2026_TeamName_Preliminary.pdf`)
 - [ ] Technology declaration completed (`SDC2026_TeamName_TechDeclaration.pdf`)
 - [x] Submission files renamed with your team name (replace `TeamName`)
 - [x] "How to Run" steps verified
