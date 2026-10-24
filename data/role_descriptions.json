@@ -1,0 +1,13 @@
+{
+  "Data Analyst": "Collects, cleans and preprocesses data; applies mathematical and statistical methods to identify trends and insights; presents findings to technical and non-technical audiences; and collaborates with teams to define data needs.",
+  "Data Engineer": "Builds and maintains data pipelines and data-processing workflows, integrates data from sources, and prepares reliable data stores for analytics and downstream use.",
+  "Back End Engineer": "Develops and maintains server-side application logic, APIs and data-access components, and integrates application services with databases and other systems.",
+  "Front End Engineer": "Builds and maintains the user-facing parts of web applications, implements interface designs, connects interfaces to application services, and tests usability and functionality.",
+  "UX Designer": "Researches user needs, maps user journeys and interaction flows, creates and tests prototypes, and improves product experiences using feedback and usability findings.",
+  "UI Designer": "Designs visual interface layouts and components, applies interaction and visual-design principles, and refines screens for consistency, accessibility and usability.",
+  "Security Analyst / Associate Security Analyst": "Supports security-system administration and monitoring, reviews alerts, documents security events, assists with vulnerability assessments and incident response, and helps implement security policies.",
+  "Digital Marketing Executive": "Plans and executes digital campaigns across channels such as SEO, search advertising, email, social media and display; monitors performance and uses analytics to optimize campaigns.",
+  "SEO Strategist": "Plans and evaluates search-engine optimization activities, researches search intent and keywords, improves website content and technical discoverability, and monitors organic-search performance.",
+  "Associate AI/ML Engineer": "Works under technical guidance on data pipelines and data stores, applies machine-learning methods, develops and tests programs, and analyzes and visualizes results.",
+  "Quantitative & Data Analyst (Fintech)": "Uses quantitative and data-analysis methods to support fintech products or services, interpret financial or transaction data, and communicate evidence to product or business stakeholders."
+}
