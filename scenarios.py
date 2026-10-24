@@ -16,9 +16,56 @@ import warnings
 from pathlib import Path
 
 from match import _canonical_skill, _load_aliases
+from scripts.build_roles import load_role_data as _load_role_data_from_csv
 
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
+
+
+def load_role_data(data_dir=None):
+    """Load role data, preferring the authoritative roles CSV.
+
+    The CSV loader understands UTF-8 BOMs and parses the JSON skill columns.
+    Generated JSON is a fallback for copied data folders without a CSV.
+    """
+    directory = Path(data_dir) if data_dir is not None else DATA_DIR
+    csv_path = directory / "roles.csv"
+    if csv_path.is_file():
+        return _load_role_data_from_csv(csv_path)
+
+    catalogue_path = directory / "roles_catalogue.json"
+    if catalogue_path.is_file():
+        with catalogue_path.open(encoding="utf-8") as source:
+            roles = json.load(source)
+
+        def read_optional_json(filename, default):
+            path = directory / filename
+            if not path.is_file():
+                return default
+            with path.open(encoding="utf-8") as source:
+                return json.load(source)
+
+        return {
+            "roles": roles,
+            "role_weights": read_optional_json("role_weights.json", {}),
+            "role_sources": read_optional_json("role_sources.json", {}),
+            "role_descriptions": read_optional_json("role_descriptions.json", {}),
+        }
+
+    legacy_path = directory / "roles.json"
+    if legacy_path.is_file():
+        with legacy_path.open(encoding="utf-8") as source:
+            roles = json.load(source)
+        return {
+            "roles": roles,
+            "role_weights": {},
+            "role_sources": {},
+            "role_descriptions": {},
+        }
+
+    raise FileNotFoundError(
+        f"No roles.csv, roles_catalogue.json, or roles.json found in {directory}."
+    )
 
 
 def _number(value, label, *, positive=False):
@@ -37,7 +84,8 @@ def get_weights(scenario_name, *, data_dir=None):
     All catalogue skills default to the configured neutral weight. Non-catalogue
     trend skills are also returned; match.score_roles ignores irrelevant skills.
     Explicit is_scenario_input=false rows are excluded. Missing flags are allowed.
-    Synthetic inputs emit a warning; evidence is not independently verified here.
+    Uncertain active trends stay neutral in every scenario. Synthetic inputs emit
+    a warning; evidence is not independently verified here.
     """
     directory = Path(data_dir) if data_dir is not None else DATA_DIR
     with (directory / "scenario_settings.json").open(encoding="utf-8") as source:
@@ -57,9 +105,13 @@ def get_weights(scenario_name, *, data_dir=None):
     }
     if not factors["declining"] < factors["stable"] == neutral < factors["rising"]:
         raise ValueError("Multipliers must satisfy declining < stable = neutral < rising.")
-    aliases = _load_aliases()
-    with (directory / "roles.json").open(encoding="utf-8") as source:
-        roles = json.load(source)
+    aliases_path = directory / "skill_aliases.json"
+    aliases = (
+        _load_aliases(directory)
+        if aliases_path.is_file()
+        else _load_aliases()
+    )
+    roles = load_role_data(directory)["roles"]
     weights = {
         _canonical_skill(skill, aliases): neutral
         for required in roles.values()
@@ -86,7 +138,7 @@ def get_weights(scenario_name, *, data_dir=None):
                 raise ValueError("is_scenario_input must be true, false, or empty.")
             skill = _canonical_skill(row["skill_name"], aliases)
             direction = row["trend_direction"].strip().lower()
-            if not skill or direction not in factors:
+            if not skill or direction not in {*factors, "uncertain"}:
                 raise ValueError(f"Invalid skill or trend_direction at line {reader.line_num}.")
             raw_growth = row.get("growth_rate", "").strip().removesuffix("%")
             growth = _number(raw_growth, "growth_rate") if raw_growth else 0.0
@@ -94,16 +146,20 @@ def get_weights(scenario_name, *, data_dir=None):
             if skill in seen and seen[skill] != signature:
                 raise ValueError(f"Conflicting trends for {skill!r}; resolve them before scoring.")
             seen[skill] = signature
-            adjustment = max(-limit, min(limit, growth * sensitivity))
-            # Stable stays exactly neutral; growth reinforces direction without
-            # allowing a rising weight below neutral or a declining one above it.
-            weight = factors[direction] * (1 + adjustment)
-            if direction == "stable":
+            if direction == "uncertain":
+                # Uncertainty is evidence metadata, not a score signal.
                 weight = neutral
-            elif direction == "rising":
-                weight = max(factors[direction], weight)
             else:
-                weight = min(factors[direction], weight)
+                adjustment = max(-limit, min(limit, growth * sensitivity))
+                # Stable stays neutral; growth reinforces direction without
+                # crossing neutral in the opposite direction.
+                weight = factors[direction] * (1 + adjustment)
+                if direction == "stable":
+                    weight = neutral
+                elif direction == "rising":
+                    weight = max(factors[direction], weight)
+                else:
+                    weight = min(factors[direction], weight)
             weights[skill] = max(minimum, weight)
             synthetic |= "synthetic" in row.get("verification_status", "").lower()
     if synthetic:
